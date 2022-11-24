@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PriceServer.Util
+﻿namespace PriceServer.Util
 {
     internal class Currency
     {
+        public string GetBaseCurrency(string symbol)
+        {
+            return symbol.Split('/')[0];
+        }
+
+        public string GetQuoteCurrency(string symbol)
+        {
+            return symbol.Split('/')[1];
+        }
     }
 }

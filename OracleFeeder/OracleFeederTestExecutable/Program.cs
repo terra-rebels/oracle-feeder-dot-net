@@ -1,8 +1,15 @@
-﻿namespace OracleFeederTest
+﻿using Microsoft.Extensions.Configuration;
+
+namespace OracleFeederTest
 {
-    class OracleFeederTestExecutable
+    class OracleFeeder
     {
         public static void Main(string[] args)
+        {
+
+        }
+
+        static void BuildConfig(IConfigurationBuilder configuration)
         {
 
         }

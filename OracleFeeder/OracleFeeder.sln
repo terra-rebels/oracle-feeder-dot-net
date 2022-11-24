@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feeder", "Feeder\Feeder.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriceServer", "PriceServer\PriceServer.csproj", "{DF956C56-64E3-4F5C-8621-2282B1B54090}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleFeederTestExecutable", "OracleFeederTestExecutable\OracleFeederTestExecutable.csproj", "{AB146F11-E27B-4FBF-93DB-D2A2A7462C31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleFeeder", "OracleFeederTestExecutable\OracleFeeder.csproj", "{AB146F11-E27B-4FBF-93DB-D2A2A7462C31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
