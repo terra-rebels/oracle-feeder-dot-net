@@ -1,4 +1,8 @@
-﻿namespace PriceServer.Util
+﻿using Microsoft.Win32.SafeHandles;
+using PriceServer.Models;
+using PriceServer.Src.Util;
+
+namespace PriceServer.Util
 {
     internal class Statistics
     {
@@ -14,27 +18,47 @@
                 return array[0];
             }
 
-            return array.Aggregate(0.0, (a, b) => (a + b) / Num.num(array.Length));
+            return array.Aggregate((a, b) => (a + b) / Num.num(array.Length));
         }
 
-        public double vwap(Dictionary<double, double> PriceVolumeArray) 
+        public double vwap(PriceVolume[] array)
         {
-           
-                if(PriceVolumeArray is null || PriceVolumeArray.Values is null || PriceVolumeArray.Values.ToArray().Length == 0)
-                {
-                    throw new ArgumentNullException("empty array");
-                }
-                    
-                if (PriceVolumeArray.Values.ToArray().Length == 1)
-                {
-                    return PriceVolumeArray.Keys.ElementAt(0);
-                }
-
-                // rewrite
-                // const sum = array.reduce((s, x) => s.plus(x.volume.multipliedBy(x.price)), num(0))
-                // const totalVolume = array.reduce((s, x) => s.plus(x.volume), num(0))
-                // return sum.dividedBy(totalVolume) || num(0)
-             return 0;
+            if (array is null || array.Length < 1)
+            {
+                throw new ArgumentNullException("empty array");
             }
+
+            if (array.Length == 1)
+            {
+                return array[0].Price;
+            }
+
+            var sum = array.Aggregate(Num.num(0.0), (s, x) => s + (x.Volume * x.Price)));
+            var totalVolume = array.Aggregate(Num.num(0.0), (s, x) => s + x.Volume);
+            return sum / totalVolume == 0 ? Num.num(0) : sum / totalVolume;
+        }
+        public double tvwap(PriceVolume[] array, double minimumTimeWeight = 0.2)
+        {
+            if (array is null || array.Length < 1)
+            {
+                throw new ArgumentNullException("empty array");
+            }
+
+            if (array.Length == 1)
+            {
+                return array[0].Price;
+            }
+            var sortedArray = array.OrderByDescending(a => a.Timestamp);
+            var now = Num.num(DateTime.Now.Ticks);
+            var period = now - (Num.num(array[0].Timestamp));
+            var weightUnit = (Num.num(1) - minimumTimeWeight) / period;
+
+            var tvwapTrades = sortedArray.Select(trade => {
+                return new PriceVolume { Price = trade.Price, Volume = trade.Volume * weightUnit * (period - (now - Num.num(trade.Timestamp)) + minimumTimeWeight) };
+            }).ToArray();
+            
+            
+            return vwap(tvwapTrades);
         }
     }
+}

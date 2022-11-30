@@ -7,9 +7,24 @@
             return number;
         }
 
-        public static double num(string number)
+        public static long num(long number)
         {
-            var success = double.TryParse(number, out double result);
+            return number;
+        }
+
+        public static int num(int number)
+        {
+            return number;
+        }
+
+        public static float num(float number)
+        {
+            return number;
+        }
+
+        public static long num(string number)
+        {
+            var success = long.TryParse(number, out long result);
             if (success) { return result; }
 
             throw new InvalidOperationException("not a number");
