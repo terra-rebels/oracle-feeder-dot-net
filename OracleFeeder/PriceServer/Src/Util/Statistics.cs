@@ -33,7 +33,7 @@ namespace PriceServer.Util
                 return array[0].Price;
             }
 
-            var sum = array.Aggregate(Num.num(0.0), (s, x) => s + (x.Volume * x.Price)));
+            var sum = array.Aggregate(Num.num(0.0), (s, x) => s + (x.Volume * x.Price));
             var totalVolume = array.Aggregate(Num.num(0.0), (s, x) => s + x.Volume);
             return sum / totalVolume == 0 ? Num.num(0) : sum / totalVolume;
         }
