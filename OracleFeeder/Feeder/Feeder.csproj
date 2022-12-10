@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TerraSharp" Version="1.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="TerraSharp" Version="1.1.6" />
+    <PackageReference Include="TerraSharp.Legacy" Version="1.1.9" />
   </ItemGroup>
 
 </Project>
